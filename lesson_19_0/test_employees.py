@@ -67,6 +67,12 @@ def test_created_employee(base_url, auth_headers):
     with allure.step(f"Check full_name employee"):
         assert created_employee_json['full_name'] == full_name
 
+    with allure.step(f"DELETE /students/employees/{created_employee_json['id']}"):
+        requests.delete(
+            url=f'{base_url}/students/employees/{created_employee_json["id"]}',
+            headers=auth_headers
+        )
+
 
 @allure.feature("Employee")
 @allure.story("Get employee")
