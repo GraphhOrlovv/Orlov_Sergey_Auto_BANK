@@ -4,3 +4,8 @@
 /allure-results
 /tests/allure-results
 /zadachki/allure-results
+
+__pycache__/
+.pytest_cache/
+allure-report/
+allure-results/

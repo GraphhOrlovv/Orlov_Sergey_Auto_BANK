@@ -1,4 +1,5 @@
 import requests
+import allure
 
 
 # BASE_URL = 'https://api.bank.easyitlab.tech'
@@ -31,18 +32,35 @@ import requests
 #     }
 #     return headers
 
+@allure.feature("Dashboard")
+@allure.story("Get dashboard")
+@allure.title("Get dashboard")
+@allure.suite("Dashboard API")
+@allure.description("Check dashboard")
 def test_get_dashboard_success(base_url, auth_headers):
-    students_dashboard = requests.get(
-        url=f'{base_url}/students/dashboard',
-        headers=auth_headers
-    )
+    with allure.step(f"Send GET /students/dashboard"):
+        students_dashboard = requests.get(
+            url=f'{base_url}/students/dashboard',
+            headers=auth_headers
+        )
 
-    assert students_dashboard.status_code == 200, f"error! status_code: {students_dashboard.status_code}"
+    with allure.step(f"Check status code 200"):
+        assert students_dashboard.status_code == 200, f"error! status_code: {students_dashboard.status_code}"
 
-    students_dashboard_json = students_dashboard.json()
+    with allure.step(f"Get json response"):
+        students_dashboard_json = students_dashboard.json()
 
-    assert 'employees_total' in students_dashboard_json
-    assert 'clients_total' in students_dashboard_json
-    assert 'accounts_total' in students_dashboard_json
-    assert 'tickets_total' in students_dashboard_json
-    assert 'transfers_total' in students_dashboard_json
+    with allure.step(f"Check employees_total in  students_dashboard_json"):
+        assert 'employees_total' in students_dashboard_json
+
+    with allure.step(f"Check clients_total in  students_dashboard_json"):
+        assert 'clients_total' in students_dashboard_json
+
+    with allure.step(f"Check accounts_total in  students_dashboard_json"):
+        assert 'accounts_total' in students_dashboard_json
+
+    with allure.step(f"Check tickets_total in  students_dashboard_json"):
+        assert 'tickets_total' in students_dashboard_json
+
+    with allure.step(f"Check transfers_total in  students_dashboard_json"):
+        assert 'transfers_total' in students_dashboard_json
