@@ -1,40 +1,40 @@
 import requests
 
-BASE_URL = 'https://api.bank.easyitlab.tech'
 
-def get_access_token():
-    response = requests.post(
-        url=f'{BASE_URL}/auth/login',
-        headers={
-            'Content-Type': 'application/json'
-        },
-        json={
-            "email": "seregaorlov.gus@yandex.ru",
-            "password": "8WMZTULaH05V"
-        }
-    )
+# BASE_URL = 'https://api.bank.easyitlab.tech'
 
-    assert response.status_code == 200, f"error! status_code: {response.status_code}"
-    response_json = response.json()
+# def get_access_token():
+#     response = requests.post(
+#         url=f'{BASE_URL}/auth/login',
+#         headers={
+#             'Content-Type': 'application/json'
+#         },
+#         json={
+#             "email": "seregaorlov.gus@yandex.ru",
+#             "password": "8WMZTULaH05V"
+#         }
+#     )
+#
+#     assert response.status_code == 200, f"error! status_code: {response.status_code}"
+#     response_json = response.json()
+#
+#     assert isinstance(response_json, dict)
+#
+#     token = response_json.get('access_token')
+#     assert token, "token not found"
+#     return token
+#
+# def get_auth_headers():
+#     headers = {
+#         'Authorization': f'Bearer {get_access_token()}',
+#         'Content-Type': 'application/json'
+#     }
+#     return headers
 
-    assert isinstance(response_json, dict)
-
-    token = response_json.get('access_token')
-    assert token, "token not found"
-    return token
-
-def get_auth_headers():
-    headers = {
-        'Authorization': f'Bearer {get_access_token()}',
-        'Content-Type': 'application/json'
-    }
-    return headers
-
-def test_get_dashboard_success():
-    headers = get_auth_headers()
+def test_get_dashboard_success(base_url, auth_headers):
     students_dashboard = requests.get(
-        url=f'{BASE_URL}/students/dashboard',
-        headers=headers
+        url=f'{base_url}/students/dashboard',
+        headers=auth_headers
     )
 
     assert students_dashboard.status_code == 200, f"error! status_code: {students_dashboard.status_code}"
