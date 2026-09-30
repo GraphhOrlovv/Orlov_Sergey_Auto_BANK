@@ -1,4 +1,4 @@
-from SQL_python.credentials import POSTGRES_DB, POSTGRES_USER
+from credentials import POSTGRES_DB, POSTGRES_USER
 
 
 def test_database_connection(db_cursor):
