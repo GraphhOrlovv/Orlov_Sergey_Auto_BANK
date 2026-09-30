@@ -9,3 +9,4 @@ __pycache__/
 .pytest_cache/
 allure-report/
 allure-results/
+SQL_python/credentials.py
