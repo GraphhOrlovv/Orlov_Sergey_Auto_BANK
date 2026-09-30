@@ -25,11 +25,11 @@ def ssh_tunnel():
         (SSH_HOST, SSH_PORT),
         ssh_username=SSH_USER,
         ssh_password=SSH_PASSWORD,
-        remote_bind_adress=(
+        remote_bind_address=(
             REMOTE_POSTGRES_HOST,
             REMOTE_POSTGRES_PORT
         ),
-        local_bind_adress=(
+        local_bind_address=(
             LOCAL_BIND_ADDRESS,
             LOCAL_BIND_PORT
         )
