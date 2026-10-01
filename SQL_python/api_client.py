@@ -18,7 +18,7 @@ def login(username: str, password: str, business_role: str) -> str:
         }
     )
     response.raise_for_status()
-    return response.json()
+    return response.json()["access_token"]
 
 def create_employee(
         student_token: str,
@@ -37,10 +37,10 @@ def create_employee(
     response.raise_for_status()
     return response.json()
 
-def create_client(employee_token: str, client_data: dict) -> dict:
+def create_client(student_token: str, employee_id: str, client_data: dict) -> dict:
     response = requests.post(
-        url=f'{BASE_URL}/employees/clients',
-        headers=auth_headers(employee_token),
+        url=f'{BASE_URL}/students/employees/{employee_id}/clients',
+        headers=auth_headers(student_token),
         json=client_data
     )
     response.raise_for_status()
@@ -48,7 +48,14 @@ def create_client(employee_token: str, client_data: dict) -> dict:
 
 def delete_client(student_token: str, client_id: str) -> None:
     response = requests.delete(
-        url=f'{BASE_URL}/employees/clients/{client_id}',
+        url=f'{BASE_URL}/students/clients/{client_id}',
+        headers=auth_headers(student_token),
+    )
+    response.raise_for_status()
+
+def delete_employee(student_token: str, employee_id: str) -> None:
+    response = requests.delete(
+        url=f'{BASE_URL}/students/employees/{employee_id}',
         headers=auth_headers(student_token),
     )
     response.raise_for_status()
